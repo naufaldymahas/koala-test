@@ -1,0 +1,18 @@
+a. Display Customer List including calculating the total order.
+	1. SELECT SUM(od.qty) total_item_buy, c.* FROM customers c
+		JOIN orders o ON c.customer_id=o.customer_id
+		JOIN order_details od ON od.order_id=o.order_id 
+		GROUP BY c.customer_id;
+	2. SELECT COUNT(o) total_order, c.* FROM customers c 
+		JOIN orders o ON o.customer_id=c.customer_id
+		GROUP BY c.customer_id;
+
+b. Show Product List including calculating the number of orders sorted by the most in the order.
+	- SELECT SUM(od.qty) total_order, p.* FROM products p
+		JOIN order_details od ON od.product_id=p.product_id
+		GROUP BY p.product_id ORDER BY total_order DESC;
+
+C. Display the sort payment method data most frequently used by customers.
+	- SELECT COUNT(pm.payment_method_id) total_payment_used, pm.* FROM payment_methods pm
+		JOIN orders o ON o.payment_method_id=pm.payment_method_id
+		GROUP BY pm.payment_method_id ORDER BY total_payment_used DESC;
